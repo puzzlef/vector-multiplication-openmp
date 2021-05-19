@@ -1,0 +1,18 @@
+OMP_NUM_THREADS=4
+[00000.002 ms; 1e+04 elems.] [1.644834] multiply
+[00000.056 ms; 1e+04 elems.] [1.644834] multiplyOmp
+
+[00000.030 ms; 1e+05 elems.] [1.644924] multiply
+[00000.063 ms; 1e+05 elems.] [1.644924] multiplyOmp
+
+[00000.320 ms; 1e+06 elems.] [1.644933] multiply
+[00000.548 ms; 1e+06 elems.] [1.644933] multiplyOmp
+
+[00004.015 ms; 1e+07 elems.] [1.644934] multiply
+[00008.688 ms; 1e+07 elems.] [1.644934] multiplyOmp
+
+[00039.967 ms; 1e+08 elems.] [1.644934] multiply
+[00088.077 ms; 1e+08 elems.] [1.644934] multiplyOmp
+
+[00455.378 ms; 1e+09 elems.] [1.644934] multiply
+[01528.429 ms; 1e+09 elems.] [1.644934] multiplyOmp

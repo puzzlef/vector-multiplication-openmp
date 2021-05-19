@@ -15,46 +15,46 @@ by [this answer].
 $ g++ -O3 -fopenmp main.cxx
 $ OMP_NUM_THREADS=4 ./a.out
 
-# [00000.005 ms; 1e+04 elems.] [1.644834] multiply
-# [00000.081 ms; 1e+04 elems.] [1.644834] multiplyOmp
+# [00000.002 ms; 1e+04 elems.] [1.644834] multiply
+# [00000.056 ms; 1e+04 elems.] [1.644834] multiplyOmp
 #
-# [00000.034 ms; 1e+05 elems.] [1.644924] multiply
-# [00000.058 ms; 1e+05 elems.] [1.644924] multiplyOmp
+# [00000.030 ms; 1e+05 elems.] [1.644924] multiply
+# [00000.063 ms; 1e+05 elems.] [1.644924] multiplyOmp
 #
-# [00000.385 ms; 1e+06 elems.] [1.644933] multiply
-# [00000.700 ms; 1e+06 elems.] [1.644933] multiplyOmp
+# [00000.320 ms; 1e+06 elems.] [1.644933] multiply
+# [00000.548 ms; 1e+06 elems.] [1.644933] multiplyOmp
 #
-# [00004.217 ms; 1e+07 elems.] [1.644934] multiply
-# [00009.310 ms; 1e+07 elems.] [1.644934] multiplyOmp
+# [00004.015 ms; 1e+07 elems.] [1.644934] multiply
+# [00008.688 ms; 1e+07 elems.] [1.644934] multiplyOmp
 #
-# [00039.891 ms; 1e+08 elems.] [1.644934] multiply
-# [00092.159 ms; 1e+08 elems.] [1.644934] multiplyOmp
+# [00039.967 ms; 1e+08 elems.] [1.644934] multiply
+# [00088.077 ms; 1e+08 elems.] [1.644934] multiplyOmp
 #
-# [00409.015 ms; 1e+09 elems.] [1.644934] multiply
-# [00894.247 ms; 1e+09 elems.] [1.644934] multiplyOmp
+# [00455.378 ms; 1e+09 elems.] [1.644934] multiply
+# [01528.429 ms; 1e+09 elems.] [1.644934] multiplyOmp
 ```
 
 ```bash
 $ g++ -O3 -fopenmp main.cxx
 $ OMP_NUM_THREADS=48 ./a.out
 
-# [00000.003 ms; 1e+04 elems.] [1.644834] multiply
-# [00023.995 ms; 1e+04 elems.] [1.644834] multiplyOmp
+# [00000.006 ms; 1e+04 elems.] [1.644834] multiply
+# [00019.631 ms; 1e+04 elems.] [1.644834] multiplyOmp
 #
-# [00000.034 ms; 1e+05 elems.] [1.644924] multiply
-# [00024.159 ms; 1e+05 elems.] [1.644924] multiplyOmp
+# [00000.025 ms; 1e+05 elems.] [1.644924] multiply
+# [00000.029 ms; 1e+05 elems.] [1.644924] multiplyOmp
 #
-# [00000.495 ms; 1e+06 elems.] [1.644933] multiply
-# [00023.299 ms; 1e+06 elems.] [1.644933] multiplyOmp
+# [00000.333 ms; 1e+06 elems.] [1.644933] multiply
+# [00000.189 ms; 1e+06 elems.] [1.644933] multiplyOmp
 #
-# [00003.968 ms; 1e+07 elems.] [1.644934] multiply
-# [00021.626 ms; 1e+07 elems.] [1.644934] multiplyOmp
+# [00004.090 ms; 1e+07 elems.] [1.644934] multiply
+# [00006.126 ms; 1e+07 elems.] [1.644934] multiplyOmp
 #
-# [00039.168 ms; 1e+08 elems.] [1.644934] multiply
-# [00079.011 ms; 1e+08 elems.] [1.644934] multiplyOmp
+# [00039.141 ms; 1e+08 elems.] [1.644934] multiply
+# [00064.325 ms; 1e+08 elems.] [1.644934] multiplyOmp
 #
-# [00400.236 ms; 1e+09 elems.] [1.644934] multiply
-# [00648.833 ms; 1e+09 elems.] [1.644934] multiplyOmp
+# [00418.629 ms; 1e+09 elems.] [1.644934] multiply
+# [00625.270 ms; 1e+09 elems.] [1.644934] multiplyOmp
 ```
 
 <br>
