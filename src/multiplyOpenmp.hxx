@@ -9,16 +9,15 @@ using std::min;
 
 
 template <class T>
-__device__ void multiplyKernelLoop(T *a, T *x, T *y, int N, int i, int DI) {
-  for (; i<N; i+=DI)
+void multiplyOmp(T *a, const T *x, const T *y, int N) {
+  #pragma omp parallel for
+  for (int i=0; i<N; i++)
     a[i] = x[i] * y[i];
 }
 
-
 template <class T>
-__global__ void multiplyKernel(T *a, T *x, T* y, int N) {
-  DEFINE(t, b, B, G);
-  multiplyKernelLoop(a, x, y, N, B*b+t, G*B);
+void multiplyOmp(vector<T>& a, const vector<T>& x, const vector<T>& y) {
+  multiplyOmp(a.data(), x.data(), y.data(), x.size());
 }
 
 

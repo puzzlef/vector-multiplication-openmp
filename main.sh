@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-src="multiply-cuda-adjust-launch"
+src="multiply-openmp-adjust-schedule"
 out="/home/resources/Documents/subhajit/$src.log"
 ulimit -s unlimited
 printf "" > "$out"
@@ -10,5 +10,5 @@ git clone https://github.com/puzzlef/$src
 cd $src && echo ""
 
 # Run
-nvcc -std=c++17 -Xcompiler -O3 main.cu
+g++ -O3 main.cxx
 stdbuf --output=L ./a.out 2>&1 | tee -a "$out"

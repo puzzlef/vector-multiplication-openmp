@@ -1,12 +1,11 @@
-# https://www.kaggle.com/wolfram77/puzzlef-multiply-cuda-adjust-launch
+# https://www.kaggle.com/wolfram77/puzzlef-multiply-openmp-adjust-schedule
 import os
 from IPython.display import FileLink
-src="multiply-cuda-adjust-launch"
+src="multiply-openmp-adjust-schedule"
 out="{}.txt".format(src)
 !printf "" > "$out"
 display(FileLink(out))
-!ulimit -s unlimited && echo ""
-!nvidia-smi && echo ""
+!echo ""
 
 # Download program
 !rm -rf $src
@@ -14,5 +13,5 @@ display(FileLink(out))
 !echo ""
 
 # Run
-!nvcc -std=c++17 -Xcompiler -O3 $src/main.cu
-!stdbuf --output=L ./a.out 2>&1 | tee -a "$out"
+!g++ -O3 $src/main.cxx
+!ulimit -s unlimited && stdbuf --output=L ./a.out 2>&1 | tee -a "$out"
