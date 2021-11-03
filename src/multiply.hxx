@@ -6,9 +6,10 @@
 
 struct MultiplyOptions {
   int repeat;
-  int gridLimit;
-  int blockSize;
+  int threads;
+  int scheduleKind;
+  int chunkSize;
 
-  MultiplyOptions(int repeat=1, int gridLimit=GRID_LIMIT, int blockSize=BLOCK_LIMIT) :
-  repeat(repeat), gridLimit(gridLimit), blockSize(blockSize) {}
+  MultiplyOptions(int repeat=1, int threads=1, int scheduleKind=omp_sched_static, int chunkSize=64) :
+  repeat(repeat), threads(threads), scheduleKind(scheduleKind), chunkSize(chunkSize) {}
 };
