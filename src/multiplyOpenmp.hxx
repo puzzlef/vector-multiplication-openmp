@@ -20,11 +20,11 @@ void multiplyOmp(vector<T>& a, const vector<T>& x, const vector<T>& y) {
 
 template <class T>
 float multiplyOpenmp(T *a, const T *x, const T *y, int N, const MultiplyOptions& o={}) {
-  int T  = o.threads;
+  int NT = o.numThreads;
   int SK = o.scheduleKind;
   int SC = o.chunkSize;
-  omp_set_num_threads(T);
-  omp_set_schedule(SK, SC);
+  omp_set_num_threads(NT);
+  omp_set_schedule((omp_sched_t) SK, SC);
   return measureDuration([&] { multiplyOmp(a, x, y, N); }, o.repeat);
 }
 
