@@ -1,15 +1,19 @@
-Comparing various launch configs for CUDA based vector multiply.
+Comparing various *schedules* for *OpenMP-based* **element-by-element vector multiplication**.
 
-`TODO!`
+Two floating-point vectors `x` and `y`, with number of **elements** from `1E+6`
+to `1E+9` were multiplied using OpenMP. Each element count was attempted with
+various **OpenMP schedule configs**, running each config 5 times to get a good
+time measure. Multiplication here represents any memory-aligned independent
+operation, or a `map()` operation. Results indicate a **num-threads** of `32`,
+and a **schedule-kind** of `auto` to be suitable (for **float**).
 
-Two floating-point vectors `x` and `y`, with number of **elements** from `1E+6` to `1E+9` were multiplied using CUDA. Each element count was attempted with various **CUDA launch configs**, running each config 5 times to get a good time measure. Multiplication here represents any memory-aligned independent operation, or a `map()` operation. Results indicate that a **grid_limit** of `16384/32768`, and a **block_size** of `128/256` to be suitable for both **float** and **double**. Using a **grid_limit** of `MAX` and a **block_size** of `256` could be a decent choice.
-
-All outputs are saved in [out](out/) and a small part of the output is listed here. [Nsight Compute] profile results are saved in [prof](prof/). Some [charts] are also included below, generated from [sheets]. This experiment was done with guidance from [Prof. Dip Sankar Banerjee] and [Prof. Kishore Kothapalli].
+All outputs are saved in [out](out/) and a small part of the output is listed
+here. Some [charts] are also included below, generated from [sheets].
 
 <br>
 
 ```bash
-$ nvcc -std=c++17 -Xcompiler -O3 main.cu
+$ g++ -O3 -fopenmp main.cxx
 $ ./a.out
 
 # ...
@@ -30,22 +34,17 @@ $ ./a.out
 # ...
 ```
 
-[![](https://i.imgur.com/bGUUPot.gif)][sheetp]
-[![](https://i.imgur.com/eLQ7XpP.gif)][sheetp]
+[![](https://i.imgur.com/2gtDdEv.png)][sheetp]
+[![](https://i.imgur.com/9TtYTvh.png)][sheetp]
+[![](https://i.imgur.com/kDoKEVr.png)][sheetp]
+[![](https://i.imgur.com/7sUkqcZ.png)][sheetp]
+[![](https://i.imgur.com/015fCBk.png)][sheetp]
 
-[![](https://i.imgur.com/IagoPuk.gif)][sheetp]
-[![](https://i.imgur.com/4L394Vk.gif)][sheetp]
-
-[![](https://i.imgur.com/tCUuW0a.gif)][sheetp]
-[![](https://i.imgur.com/tZaV8K6.gif)][sheetp]
-
-[![](https://i.imgur.com/U6jbPeH.gif)][sheetp]
-[![](https://i.imgur.com/mpjbvkK.gif)][sheetp]
-
-[![](https://i.imgur.com/TVSzgPr.png)][sheetp]
-[![](https://i.imgur.com/edMTlIA.png)][sheetp]
-[![](https://i.imgur.com/g5oxQ1H.png)][sheetp]
-[![](https://i.imgur.com/1Jyepy2.png)][sheetp]
+[![](https://i.imgur.com/exRwNpv.png)][sheetp]
+[![](https://i.imgur.com/WI9DTDj.png)][sheetp]
+[![](https://i.imgur.com/DbwMaCk.png)][sheetp]
+[![](https://i.imgur.com/1QOVrAq.png)][sheetp]
+[![](https://i.imgur.com/3wV7z9c.png)][sheetp]
 
 <br>
 <br>
@@ -53,17 +52,14 @@ $ ./a.out
 
 ## References
 
-- [CUDA by Example :: Jason Sanders, Edward Kandrot](https://www.slideshare.net/SubhajitSahu/cuda-by-example-notes)
+- [What's the difference between "static" and "dynamic" schedule in OpenMP?](https://stackoverflow.com/a/10852852/1413259)
+- [OpenMP Dynamic vs Guided Scheduling](https://stackoverflow.com/a/43047074/1413259)
 
 <br>
 <br>
 
-[![](https://i.imgur.com/lRwvZLe.png)](https://www.youtube.com/watch?v=vTdodyhhjww)
-[![DOI](https://zenodo.org/badge/375073607.svg)](https://zenodo.org/badge/latestdoi/375073607)
+[![](https://i.imgur.com/MJi0vOn.jpg)](https://knowyourcodelyokofacts.tumblr.com/post/49493220478/jeremy-belpois-jeremy-is-known-to-have-been)
 
-[Prof. Dip Sankar Banerjee]: https://sites.google.com/site/dipsankarban/
-[Prof. Kishore Kothapalli]: https://cstar.iiit.ac.in/~kkishore/
-[Nsight Compute]: https://developer.nvidia.com/nsight-compute
-[charts]: https://photos.app.goo.gl/xorYb1MZSNqxUgNy7
-[sheets]: https://docs.google.com/spreadsheets/d/1fWcVNQbANgiNepryktAsIWUHCNiAi-Yf1qQyiLsTJio/edit?usp=sharing
-[sheetp]: https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5RS676pMmWtXRj0AaPSkBDdFHZWTEDgyMJGDq2mdSz7GfWektVErY130Y84eTAxuCMDGogdvLEzyZ/pubhtml
+[charts]: https://photos.app.goo.gl/FTjLSTf2w3oh3Rju6
+[sheets]: https://docs.google.com/spreadsheets/d/1B8kQmQkjyvqnjG3wSYxVFpRLCCWJ_gGI_pNjfaiCpp0/edit?usp=sharing
+[sheetp]: https://docs.google.com/spreadsheets/d/e/2PACX-1vQDbuQPxr19ZhCxpXDUP-HwpvvPwnw4v-0ZGTE_9qFCStkCauPnGG_rDGQSNyurM6CMj2F6ql_pXGLG/pubhtml
