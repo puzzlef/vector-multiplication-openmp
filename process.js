@@ -41,9 +41,10 @@ function writeCsv(pth, rows) {
 // -----
 
 function readLogLine(ln, data, state) {
+  if (data.size===0) data.set('all', []);
   if (RRESLT.test(ln)) {
     var [, time, elements, sum, technique] = RRESLT.exec(ln);
-    data.get(state.omp_num_threads).push(Object.assign({}, state, {
+    data.get('all').push(Object.assign({}, state, {
       time:     parseFloat(time),
       elements: parseFloat(elements),
       sum:      parseFloat(sum),

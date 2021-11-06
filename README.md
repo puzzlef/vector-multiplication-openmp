@@ -23,48 +23,16 @@ experiment was done with guidance from [Prof. Dip Sankar Banerjee] and
 
 ```bash
 $ g++ -O3 -fopenmp main.cxx
-$ OMP_NUM_THREADS=4 ./a.out
+$ ./a.out
 
-# [00000.002 ms; 1e+04 elems.] [1.644834] multiply
-# [00000.056 ms; 1e+04 elems.] [1.644834] multiplyOmp
-#
-# [00000.030 ms; 1e+05 elems.] [1.644924] multiply
-# [00000.063 ms; 1e+05 elems.] [1.644924] multiplyOmp
-#
-# [00000.320 ms; 1e+06 elems.] [1.644933] multiply
-# [00000.548 ms; 1e+06 elems.] [1.644933] multiplyOmp
-#
-# [00004.015 ms; 1e+07 elems.] [1.644934] multiply
-# [00008.688 ms; 1e+07 elems.] [1.644934] multiplyOmp
-#
-# [00039.967 ms; 1e+08 elems.] [1.644934] multiply
-# [00088.077 ms; 1e+08 elems.] [1.644934] multiplyOmp
-#
-# [00455.378 ms; 1e+09 elems.] [1.644934] multiply
-# [01528.429 ms; 1e+09 elems.] [1.644934] multiplyOmp
-```
-
-```bash
-$ g++ -O3 -fopenmp main.cxx
-$ OMP_NUM_THREADS=48 ./a.out
-
-# [00000.006 ms; 1e+04 elems.] [1.644834] multiply
-# [00019.631 ms; 1e+04 elems.] [1.644834] multiplyOmp
-#
-# [00000.025 ms; 1e+05 elems.] [1.644924] multiply
-# [00000.029 ms; 1e+05 elems.] [1.644924] multiplyOmp
-#
-# [00000.333 ms; 1e+06 elems.] [1.644933] multiply
-# [00000.189 ms; 1e+06 elems.] [1.644933] multiplyOmp
-#
-# [00004.090 ms; 1e+07 elems.] [1.644934] multiply
-# [00006.126 ms; 1e+07 elems.] [1.644934] multiplyOmp
-#
-# [00039.141 ms; 1e+08 elems.] [1.644934] multiply
-# [00064.325 ms; 1e+08 elems.] [1.644934] multiplyOmp
-#
-# [00418.629 ms; 1e+09 elems.] [1.644934] multiply
-# [00625.270 ms; 1e+09 elems.] [1.644934] multiplyOmp
+# [00000.164 ms; 1e+06 elems.] [1.644725] multiplySeq
+# [00000.291 ms; 1e+06 elems.] [1.644725] multiplyOpenmp
+# [00002.108 ms; 1e+07 elems.] [1.644725] multiplySeq
+# [00002.654 ms; 1e+07 elems.] [1.644725] multiplyOpenmp
+# [00046.979 ms; 1e+08 elems.] [1.644725] multiplySeq
+# [00040.584 ms; 1e+08 elems.] [1.644725] multiplyOpenmp
+# [00398.860 ms; 1e+09 elems.] [1.644725] multiplySeq
+# [00295.718 ms; 1e+09 elems.] [1.644725] multiplyOpenmp
 ```
 
 [![](https://i.imgur.com/s4QBnrS.gif)][sheets]
