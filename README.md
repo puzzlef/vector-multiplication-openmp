@@ -1,5 +1,7 @@
 Performance of sequential execution based vs OpenMP based vector multiply.
 
+`TODO!`
+
 This experiment was for comparing the performance between:
 1. Find `x*y` using a single thread (**sequential**).
 2. Find `x*y` accelerated using **OpenMP**.
