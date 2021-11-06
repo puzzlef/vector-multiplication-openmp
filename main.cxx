@@ -30,9 +30,8 @@ void runMultiply(int N, int repeat) {
 
 int main(int argc, char **argv) {
   int repeat = argc>1? stoi(argv[1]) : 5;
-  for (int n=1000000; n<=1000000000; n*=10) {
+  for (int n=1000000; n<=1000000000; n*=10)
     runMultiply(n, repeat);
-    printf("\n");
-  }
+  printf("\n");
   return 0;
 }

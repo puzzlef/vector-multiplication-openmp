@@ -268,7 +268,7 @@ void copy(vector<T>& a, const vector<T>& x, int i, int N) {
 
 template <class T, class U>
 void copyOmp(T *a, U *x, int N) {
-  #pragma omp parallel for num_threads(32) schedule(auto,32768)
+  #pragma omp parallel for num_threads(32) schedule(auto)
   for (int i=0; i<N; i++)
     a[i] = x[i];
 }
@@ -308,7 +308,7 @@ void fill(vector<T>& a, int i, int N, const U& v) {
 
 template <class T, class U>
 void fillOmp(T *a, int N, const U& v) {
-  #pragma omp parallel for num_threads(32) schedule(auto,32768)
+  #pragma omp parallel for num_threads(32) schedule(auto)
   for (int i=0; i<N; i++)
     a[i] = v;
 }
@@ -371,7 +371,7 @@ U sum(const vector<T>& x, int i, int N, U a=U()) {
 
 template <class T, class U=T>
 U sumOmp(const T *x, int N, U a=U()) {
-  #pragma omp parallel for num_threads(32) schedule(auto,32768) reduction(+:a)
+  #pragma omp parallel for num_threads(32) schedule(auto) reduction(+:a)
   for (int i=0; i<N; i++)
     a += x[i];
   return a;
@@ -413,7 +413,7 @@ U sumAbs(const vector<T>& x, int i, int N, U a=U()) {
 
 template <class T, class U=T>
 U sumAbsOmp(const T *x, int N, U a=U()) {
-  #pragma omp parallel for num_threads(32) schedule(auto,32768) reduction(+:a)
+  #pragma omp parallel for num_threads(32) schedule(auto) reduction(+:a)
   for (int i=0; i<N; i++)
     a += abs(x[i]);
   return a;
@@ -455,7 +455,7 @@ U sumSqr(const vector<T>& x, int i, int N, U a=U()) {
 
 template <class T, class U=T>
 U sumSqrOmp(const T *x, int N, U a=U()) {
-  #pragma omp parallel for num_threads(32) schedule(auto,32768) reduction(+:a)
+  #pragma omp parallel for num_threads(32) schedule(auto) reduction(+:a)
   for (int i=0; i<N; i++)
     a += x[i]*x[i];
   return a;
@@ -519,7 +519,7 @@ void addValue(vector<T>& a, int i, int N, const U& v) {
 
 template <class T, class U>
 void addValueOmp(T *a, int N, const U& v) {
-  #pragma omp parallel for num_threads(32) schedule(auto,32768)
+  #pragma omp parallel for num_threads(32) schedule(auto)
   for (int i=0; i<N; i++)
     a[i] += v;
 }
@@ -582,7 +582,7 @@ U max(const vector<T>& x, int i, int N, U a=U()) {
 
 template <class T, class U=T>
 U maxOmp(const T *x, int N, U a=U()) {
-  #pragma omp parallel for num_threads(32) schedule(auto,32768) reduction(+:a)
+  #pragma omp parallel for num_threads(32) schedule(auto) reduction(+:a)
   for (int i=0; i<N; i++)
     a = max(a, x[i]);
   return a;
@@ -624,7 +624,7 @@ U maxAbs(const vector<T>& x, int i, int N, U a=U()) {
 
 template <class T, class U=T>
 U maxAbsOmp(const T *x, int N, U a=U()) {
-  #pragma omp parallel for num_threads(32) schedule(auto,32768) reduction(+:a)
+  #pragma omp parallel for num_threads(32) schedule(auto) reduction(+:a)
   for (int i=0; i<N; i++)
     a = max(a, abs(x[i]));
   return a;
@@ -688,7 +688,7 @@ void maxValue(vector<T>& a, int i, int N, const U& v) {
 
 template <class T, class U>
 void maxValueOmp(T *a, int N, const U& v) {
-  #pragma omp parallel for num_threads(32) schedule(auto,32768)
+  #pragma omp parallel for num_threads(32) schedule(auto)
   for (int i=0; i<N; i++)
     a[i] = max(a[i], v);
 }
@@ -751,7 +751,7 @@ U min(const vector<T>& x, int i, int N, U a=U()) {
 
 template <class T, class U=T>
 U minOmp(const T *x, int N, U a=U()) {
-  #pragma omp parallel for num_threads(32) schedule(auto,32768) reduction(+:a)
+  #pragma omp parallel for num_threads(32) schedule(auto) reduction(+:a)
   for (int i=0; i<N; i++)
     a = min(a, x[i]);
   return a;
@@ -793,7 +793,7 @@ U minAbs(const vector<T>& x, int i, int N, U a=U()) {
 
 template <class T, class U=T>
 U minAbsOmp(const T *x, int N, U a=U()) {
-  #pragma omp parallel for num_threads(32) schedule(auto,32768) reduction(+:a)
+  #pragma omp parallel for num_threads(32) schedule(auto) reduction(+:a)
   for (int i=0; i<N; i++)
     a = min(a, abs(x[i]));
   return a;
@@ -857,7 +857,7 @@ void minValue(vector<T>& a, int i, int N, const U& v) {
 
 template <class T, class U>
 void minValueOmp(T *a, int N, const U& v) {
-  #pragma omp parallel for num_threads(32) schedule(auto,32768)
+  #pragma omp parallel for num_threads(32) schedule(auto)
   for (int i=0; i<N; i++)
     a[i] = min(a[i], v);
 }
@@ -920,7 +920,7 @@ V l1Norm(const vector<T>& x, const vector<U>& y, int i, int N, V a=V()) {
 
 template <class T, class U, class V=T>
 V l1NormOmp(const T *x, const U *y, int N, V a=V()) {
-  #pragma omp parallel for num_threads(32) schedule(auto,32768) reduction(+:a)
+  #pragma omp parallel for num_threads(32) schedule(auto) reduction(+:a)
   for (int i=0; i<N; i++)
     a += abs(x[i] - y[i]);
   return a;
@@ -962,7 +962,7 @@ V l2Norm(const vector<T>& x, const vector<U>& y, int i, int N, V a=V()) {
 
 template <class T, class U, class V=T>
 V l2NormOmp(const T *x, const U *y, int N, V a=V()) {
-  #pragma omp parallel for num_threads(32) schedule(auto,32768) reduction(+:a)
+  #pragma omp parallel for num_threads(32) schedule(auto) reduction(+:a)
   for (int i=0; i<N; i++)
     a += (x[i] - y[i]) * (x[i] - y[i]);
   return sqrt(a);
@@ -1004,7 +1004,7 @@ V liNorm(const vector<T>& x, const vector<U>& y, int i, int N, V a=V()) {
 
 template <class T, class U, class V=T>
 V liNormOmp(const T *x, const U *y, int N, V a=V()) {
-  #pragma omp parallel for num_threads(32) schedule(auto,32768) reduction(+:a)
+  #pragma omp parallel for num_threads(32) schedule(auto) reduction(+:a)
   for (int i=0; i<N; i++)
     a = max(a, abs(x[i] - y[i]));
   return a;
@@ -1045,7 +1045,7 @@ void multiply(vector<T>& a, const vector<U>& x, const vector<V>& y, int i, int N
 
 template <class T, class U, class V>
 void multiplyOmp(T *a, const U *x, const V *y, int N) {
-  #pragma omp parallel for num_threads(32) schedule(auto,32768)
+  #pragma omp parallel for num_threads(32) schedule(auto)
   for (int i=0; i<N; i++)
     a[i] = x[i] * y[i];
 }
@@ -1085,7 +1085,7 @@ void multiplyValue(vector<T>& a, const vector<U>& x, const V& v, int i, int N) {
 
 template <class T, class U, class V>
 void multiplyValueOmp(T *a, const U *x, const V& v, int N) {
-  #pragma omp parallel for num_threads(32) schedule(auto,32768)
+  #pragma omp parallel for num_threads(32) schedule(auto)
   for (int i=0; i<N; i++)
     a[i] = T(x[i] * v);
 }
