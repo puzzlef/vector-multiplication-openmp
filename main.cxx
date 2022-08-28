@@ -2,66 +2,73 @@
 #include <vector>
 #include <string>
 #include <cstdio>
+#include <omp.h>
 #include "src/main.hxx"
 
 using namespace std;
 
 
 
+
+// You can define datatype with -DTYPE=...
+#ifndef TYPE
 #define TYPE float
+#endif
+// You can define number of threads with -DMAX_THREADS=...
+#ifndef MAX_THREADS
+#define MAX_THREADS 12
+#endif
+
+
 
 
 void runMultiply(int N, int repeat) {
-  vector<TYPE> a0(N), a1(N), a2(N), a3(N), a4(N);
-  vector<TYPE> x(N), y(N);
+  using T = TYPE;
+  vector<T> x(N), y(N), a(N);
+  // Initialize x, y.
   for (int i=0; i<N; i++) {
     x[i] = 1.0/(i+1);
     y[i] = 1.0/(i+1);
   }
-
   // Find x*y using a single thread.
-  float t0 = multiplySeq(a0, x, y, {repeat});
-  printf("[%09.3f ms] [%f] multiplySeq\n", t0, sum(a0));
-
-  // Find x*y accelerated using OpenMP.
-  int maxThreads = omp_get_max_threads();
-  for (int i=0;; i++) {
-    bool done = false;
-    int threads = 1<<(i/2) + (i&1)<<(i/4);
-    if (threads>maxThreads) { threads = maxThreads;  done = true; }
-    // Use static schedule.
-    for (int chunkSize=64; chunkSize<=65536; chunkSize*=2) {
-      float t1 = multiplyOpenmp(a1, x, y, {repeat, threads, omp_sched_static, chunkSize});
-      printf("[%09.3f ms] [%f] multiplyOpenmp [%d threads; schedule static %d]\n", t1, sum(a1), threads, chunkSize);
-    }
-
-    // Use dynamic schedule.
-    for (int chunkSize=64; chunkSize<=65536; chunkSize*=2) {
-      float t2 = multiplyOpenmp(a2, x, y, {repeat, threads, omp_sched_dynamic, chunkSize});
-      printf("[%09.3f ms] [%f] multiplyOpenmp [%d threads; schedule dynamic %d]\n", t2, sum(a2), threads, chunkSize);
-    }
-
-    // Use guided schedule.
-    for (int chunkSize=64; chunkSize<=65536; chunkSize*=2) {
-      float t3 = multiplyOpenmp(a3, x, y, {repeat, threads, omp_sched_guided, chunkSize});
-      printf("[%09.3f ms] [%f] multiplyOpenmp [%d threads; schedule guided %d]\n", t3, sum(a3), threads, chunkSize);
-    }
-
-    // Use auto schedule.
-    for (int chunkSize=64; chunkSize<=65536; chunkSize*=2) {
-      float t4 = multiplyOpenmp(a4, x, y, {repeat, threads, omp_sched_auto, chunkSize});
-      printf("[%09.3f ms] [%f] multiplyOpenmp [%d threads; schedule auto %d]\n", t4, sum(a4), threads, chunkSize);
-    }
-    if (done) break;
+  do {
+    float t = measureDuration([&]() { multiplyValues(x, y, a); }, repeat);
+    printf("[%09.3f ms] [%f] multiplySeq\n", t, sumValues(a));
+  } while (0);
+  // Find x*y accelerated using OpenMP (static schedule).
+  for (int chunkSize=1; chunkSize<=65536; chunkSize*=2) {
+    omp_set_schedule(omp_sched_static, chunkSize);
+    float t = measureDuration([&]() { multiplyValuesOmp(x, y, a); }, repeat);
+    printf("[%09.3f ms] [%f] multiplyOmp {sch_kind: static, chunk_size: %d}\n", t, sumValues(a), chunkSize);
+  }
+  // Find x*y accelerated using OpenMP (dynamic schedule).
+  for (int chunkSize=1; chunkSize<=65536; chunkSize*=2) {
+    omp_set_schedule(omp_sched_dynamic, chunkSize);
+    float t = measureDuration([&]() { multiplyValuesOmp(x, y, a); }, repeat);
+    printf("[%09.3f ms] [%f] multiplyOmp {sch_kind: dynamic, chunk_size: %d}\n", t, sumValues(a), chunkSize);
+  }
+  // Find x*y accelerated using OpenMP (guided schedule).
+  for (int chunkSize=1; chunkSize<=65536; chunkSize*=2) {
+    omp_set_schedule(omp_sched_guided, chunkSize);
+    float t = measureDuration([&]() { multiplyValuesOmp(x, y, a); }, repeat);
+    printf("[%09.3f ms] [%f] multiplyOmp {sch_kind: guided, chunk_size: %d}\n", t, sumValues(a), chunkSize);
+  }
+  // Find x*y accelerated using OpenMP (auto schedule).
+  for (int chunkSize=1; chunkSize<=65536; chunkSize*=2) {
+    omp_set_schedule(omp_sched_auto, chunkSize);
+    float t = measureDuration([&]() { multiplyValuesOmp(x, y, a); }, repeat);
+    printf("[%09.3f ms] [%f] multiplyOmp {sch_kind: auto, chunk_size: %d}\n", t, sumValues(a), chunkSize);
   }
 }
 
 
 int main(int argc, char **argv) {
   int repeat = argc>1? stoi(argv[1]) : 5;
-  for (int n=1000000; n<=1000000000; n*=10) {
-    printf("# Elements %.0e\n", (double) n);
-    runMultiply(n, repeat);
+  omp_set_num_threads(MAX_THREADS);
+  printf("OMP_NUM_THREADS=%d\n", MAX_THREADS);
+  for (int N=1000000; N<=1000000000; N*=10) {
+    printf("# Elements %.0e\n", (double) N);
+    runMultiply(N, repeat);
     printf("\n");
   }
   return 0;
