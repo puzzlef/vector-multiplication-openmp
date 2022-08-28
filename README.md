@@ -51,6 +51,7 @@ $ ./a.out
 
 
 [![](https://i.imgur.com/ykk7NyZ.jpg)](https://knowyourcodelyokofacts.tumblr.com/post/49493220478/jeremy-belpois-jeremy-is-known-to-have-been)<br>
+[![DOI](https://zenodo.org/badge/424267392.svg)](https://zenodo.org/badge/latestdoi/424267392)
 
 
 [Prof. Dip Sankar Banerjee]: https://sites.google.com/site/dipsankarban/
