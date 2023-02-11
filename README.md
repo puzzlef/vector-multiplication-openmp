@@ -13,7 +13,7 @@ possibly because of high communication costs, and not enough computational
 workload as indicated by [this answer]. However, **from 10⁸ elements, OpenMP**
 **approach performs better** than sequential.
 
-All outputs are saved in [out](out/) and a small part of the output is listed
+All outputs are saved in [gist] and a small part of the output is listed
 here. Some [charts] are also included below, generated from [sheets].
 
 <br>
@@ -50,6 +50,7 @@ $ ./a.out
 [![](https://i.imgur.com/gHjBLSG.jpg)](https://www.youtube.com/watch?v=0XTLuFpuAtE)
 
 [this answer]: https://stackoverflow.com/a/5368572/1413259
+[gist]: https://gist.github.com/wolfram77/f9dae5ec1b65ff87b65ab30deb3b1aa9
 [charts]: https://photos.app.goo.gl/qfFxpy6v886ZQhja8
 [sheets]: https://docs.google.com/spreadsheets/d/1IdlGlGqvn-Gprb5cpgzZU9QU3dfo3SgySajN5oDgkeQ/edit?usp=sharing
 [sheetp]: https://docs.google.com/spreadsheets/d/e/2PACX-1vQvlt3NQwk-G2wh-LjDn9KhL2gbk2C9RKfW0OQRzmDw7UhoEdCx6KBTN1xuv7Svg_eTQbmjj_92SOkw/pubhtml

@@ -1,8 +1,0 @@
-[00000.164 ms; 1e+06 elems.] [1.644725] multiplySeq
-[00000.291 ms; 1e+06 elems.] [1.644725] multiplyOpenmp
-[00002.108 ms; 1e+07 elems.] [1.644725] multiplySeq
-[00002.654 ms; 1e+07 elems.] [1.644725] multiplyOpenmp
-[00046.979 ms; 1e+08 elems.] [1.644725] multiplySeq
-[00040.584 ms; 1e+08 elems.] [1.644725] multiplyOpenmp
-[00398.860 ms; 1e+09 elems.] [1.644725] multiplySeq
-[00295.718 ms; 1e+09 elems.] [1.644725] multiplyOpenmp
