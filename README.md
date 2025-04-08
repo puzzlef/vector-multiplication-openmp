@@ -55,7 +55,7 @@ saved in [gist]. Some [charts] are also included below, generated from [sheets].
 
 
 [![](https://i.imgur.com/gHjBLSG.jpg)](https://www.youtube.com/watch?v=0XTLuFpuAtE)
-
+![](https://ga-beacon.deno.dev/G-KD28SG54JQ:hbAybl6nQFOtmVxW4if3xw/github.com/puzzlef/vector-multiplication-openmp)
 
 [this answer]: https://stackoverflow.com/a/5368572/1413259
 [gist]: https://gist.github.com/wolfram77/f9dae5ec1b65ff87b65ab30deb3b1aa9
